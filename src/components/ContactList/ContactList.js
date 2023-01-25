@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 
 import css from './ContactList.module.css';
 
-export const ContactList = ({ filter, deleteBtn }) => {
+export const ContactList = ({ contact, deleteBtn }) => {
   return (
     <ul className={css.contact__list}>
-      {filter.map(({ id, name, number }) => (
+      {contact.map(({ id, name, number }) => (
         <li key={id} className={css.contact__item}>
           <p className={css.contact__name}>
             {name} : {number}
@@ -23,7 +23,7 @@ export const ContactList = ({ filter, deleteBtn }) => {
   );
 };
 
-ContactList.prototype = {
+ContactList.propTypes = {
   filter: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

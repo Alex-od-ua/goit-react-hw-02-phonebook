@@ -11,7 +11,7 @@ export class ContactForm extends Component {
   };
 
   static propTypes = {
-    onSubmit: PropTypes.func,
+    onSubmit: PropTypes.func.isRequired,
   };
 
   nameInputId = nanoid();

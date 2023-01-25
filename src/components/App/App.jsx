@@ -21,7 +21,11 @@ export class App extends Component {
   formSubmitHandler = ({ name, number }) => {
     const contact = { id: nanoid(), name, number };
 
-    if (this.state.contacts.find(item => item.name === contact.name)) {
+    if (
+      this.state.contacts.find(
+        item => item.name.toLowerCase() === contact.name.toLowerCase()
+      )
+    ) {
       return alert(`${contact.name} is already in contacts!`);
     }
 
@@ -44,16 +48,20 @@ export class App extends Component {
     const filteredItem = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
+
     return (
       <div className={css.phonebook}>
         <h1 className={css.main__title}>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmitHandler} />
         <div>
           <h2 className={css.main__title}>Contacts</h2>
-          <Filter filter={this.onFilterInputChange} />
+          <Filter
+            filter={this.onFilterInputChange}
+            filterValue={this.state.filter}
+          />
           <ContactList
-            filter={filteredItem}
             deleteBtn={this.onDeleteButtonClick}
+            contact={filteredItem}
           />
         </div>
       </div>
